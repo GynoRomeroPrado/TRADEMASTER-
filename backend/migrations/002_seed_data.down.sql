@@ -1,0 +1,42 @@
+-- Rollback Seed Data
+-- Delete in reverse dependency order
+
+DELETE FROM jobs WHERE id IN (
+    'dd0e8400-e29b-41d4-a716-446655440000',
+    'ee0e8400-e29b-41d4-a716-446655440001'
+);
+
+DELETE FROM contractor_reputation WHERE contractor_id IN (
+    '550e8400-e29b-41d4-a716-446655440000',
+    '660e8400-e29b-41d4-a716-446655440001',
+    '770e8400-e29b-41d4-a716-446655440002'
+);
+
+DELETE FROM material_prices WHERE trade IN ('electrical', 'hvac', 'welding');
+
+DELETE FROM projects WHERE id IN (
+    'aa0e8400-e29b-41d4-a716-446655440000',
+    'bb0e8400-e29b-41d4-a716-446655440001',
+    'cc0e8400-e29b-41d4-a716-446655440002'
+);
+
+DELETE FROM certifications WHERE user_id IN (
+    '660e8400-e29b-41d4-a716-446655440001',
+    '770e8400-e29b-41d4-a716-446655440002'
+);
+
+DELETE FROM user_profiles WHERE user_id IN (
+    '550e8400-e29b-41d4-a716-446655440000',
+    '660e8400-e29b-41d4-a716-446655440001',
+    '770e8400-e29b-41d4-a716-446655440002',
+    '880e8400-e29b-41d4-a716-446655440003',
+    '990e8400-e29b-41d4-a716-446655440004'
+);
+
+DELETE FROM users WHERE id IN (
+    '550e8400-e29b-41d4-a716-446655440000',
+    '660e8400-e29b-41d4-a716-446655440001',
+    '770e8400-e29b-41d4-a716-446655440002',
+    '880e8400-e29b-41d4-a716-446655440003',
+    '990e8400-e29b-41d4-a716-446655440004'
+);

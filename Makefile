@@ -51,11 +51,20 @@ clean: ## Clean build artifacts
 	rm -rf ml-services/__pycache__ ml-services/.pytest_cache
 	@echo "Cleaned!"
 
-migrate: ## Run database migrations
-	cd backend && make migrate
+migrate-up: ## Run database migrations
+	cd backend/migrations && ./run-migrations.sh up
+
+migrate-down: ## Rollback database migrations
+	cd backend/migrations && ./run-migrations.sh down
+
+migrate-reset: ## Reset database (down and up)
+	cd backend/migrations && ./run-migrations.sh reset
+
+migrate-status: ## Check database migration status
+	cd backend/migrations && ./run-migrations.sh status
 
 seed: ## Seed database with sample data
-	cd backend && make seed
+	@echo "Database seeded via migrations"
 
 docker-up: ## Start all Docker services
 	docker-compose up -d

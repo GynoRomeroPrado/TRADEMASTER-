@@ -1,0 +1,41 @@
+# Training Coach Service - GPT-4 Integration
+# OpenAI
+openai==1.10.0
+
+# LangChain for advanced prompting
+langchain==0.1.4
+langchain-openai==0.0.5
+tiktoken==0.5.2
+
+# Web Framework
+Flask==3.0.1
+Flask-CORS==4.0.0
+gunicorn==21.2.0
+werkzeug==3.0.1
+
+# Database
+psycopg2-binary==2.9.9
+redis==5.0.1
+pymongo==4.6.1
+
+# Vector Database for context
+chromadb==0.4.22
+sentence-transformers==2.3.1
+
+# Utilities
+python-dotenv==1.0.0
+PyYAML==6.0.1
+pydantic==2.5.3
+
+# Monitoring
+prometheus-client==0.19.0
+
+# Data Processing
+numpy==1.26.3
+pandas==2.1.4
+
+# Testing
+pytest==7.4.4
+pytest-cov==4.1.0
+requests==2.31.0
+pytest-asyncio==0.23.3
