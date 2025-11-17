@@ -1,4 +1,10 @@
 import axios from 'axios'
+import type {
+  Estimate,
+  Project,
+  Job,
+  ProposalForm
+} from '@/types'
 
 const API_URL = process.env.API_URL || 'http://localhost:8080'
 const ML_API_URL = process.env.ML_API_URL || 'http://localhost:8000'
@@ -38,10 +44,10 @@ export const authApi = {
 
 // Estimation API
 export const estimationApi = {
-  create: (data: any) => api.post('/api/v1/estimates', data),
-  list: (params?: any) => api.get('/api/v1/estimates', { params }),
+  create: (data: Partial<Estimate>) => api.post('/api/v1/estimates', data),
+  list: (params?: Record<string, unknown>) => api.get('/api/v1/estimates', { params }),
   get: (id: string) => api.get(`/api/v1/estimates/${id}`),
-  update: (id: string, data: any) => api.put(`/api/v1/estimates/${id}`, data),
+  update: (id: string, data: Partial<Estimate>) => api.put(`/api/v1/estimates/${id}`, data),
   uploadBlueprint: (file: File) => {
     const formData = new FormData()
     formData.append('file', file)
@@ -53,25 +59,30 @@ export const estimationApi = {
 
 // Project API
 export const projectApi = {
-  create: (data: any) => api.post('/api/v1/projects', data),
-  list: (params?: any) => api.get('/api/v1/projects', { params }),
+  create: (data: Partial<Project>) => api.post('/api/v1/projects', data),
+  list: (params?: Record<string, unknown>) => api.get('/api/v1/projects', { params }),
   get: (id: string) => api.get(`/api/v1/projects/${id}`),
-  update: (id: string, data: any) => api.put(`/api/v1/projects/${id}`, data),
+  update: (id: string, data: Partial<Project>) => api.put(`/api/v1/projects/${id}`, data),
 }
 
 // Training API
+interface ChatMessage {
+  role: 'user' | 'assistant'
+  content: string
+}
+
 export const trainingApi = {
   listCourses: () => api.get('/api/v1/courses'),
   getCourse: (id: string) => api.get(`/api/v1/courses/${id}`),
   enroll: (courseId: string) => api.post('/api/v1/enrollments', { courseId }),
-  chatWithCoach: (messages: any[]) =>
+  chatWithCoach: (messages: ChatMessage[]) =>
     mlApi.post('/api/v1/coach/chat', { messages }),
 }
 
 // Marketplace API
 export const marketplaceApi = {
-  listJobs: (params?: any) => api.get('/api/v1/jobs', { params }),
+  listJobs: (params?: Record<string, unknown>) => api.get('/api/v1/jobs', { params }),
   getJob: (id: string) => api.get(`/api/v1/jobs/${id}`),
-  applyToJob: (id: string, data: any) =>
+  applyToJob: (id: string, data: ProposalForm) =>
     api.post(`/api/v1/jobs/${id}/apply`, data),
 }
